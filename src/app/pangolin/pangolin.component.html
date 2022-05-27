@@ -1,0 +1,43 @@
+<div class="container is-max-desktop mt-6 p-5">
+  <div class="card">
+    <header class="card-header">
+      <p class="card-header-title is-size-3 ">
+        {{ pangolin?.username}}
+      </p>
+      <button class="card-header-icon" aria-label="more options">
+      <span class="icon">
+        <i class="fas fa-angle-down" aria-hidden="true"></i>
+      </span>
+      </button>
+    </header>
+    <div class="card-content">
+      <div class="content">
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
+          molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum
+          numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium
+          optio, eaque rerum! Provident similique accusantium nemo autem. Veritatis
+          obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam
+          nihil, eveniet aliquid culpa officia aut! Impedit sit sunt quaerat, odit,
+          tenetur error, harum nesciunt ipsum debitis quas aliquid. Reprehenderit,
+          quia. Quo neque error repudiandae fuga? Ipsa laudantium molestias eos
+          sapiente officiis modi at sunt excepturi expedita sint? Sed quibusdam
+          recusandae alias error harum maxime adipisci amet laborum. Perspiciatis
+          minima nesciunt dolorem! Officiis iure rerum voluptates a cumque velit
+        </p>
+        <hr>
+
+        Rôle :
+        <span class="tag is-success has-shadow">
+     {{ role }}
+   </span>
+      </div>
+    </div>
+    <footer class="card-footer">
+      <a [routerLink]="['/pangolin_list']" class="card-footer-item">Gérer mes amis</a>
+      <a [routerLink]="['/pangolin_modifier']" class="card-footer-item">Modifier</a>
+
+    </footer>
+  </div>
+</div>
+
