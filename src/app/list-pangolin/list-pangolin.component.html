@@ -1,0 +1,32 @@
+<div class="container is-max-desktop mt-6 p-5">
+  <a [routerLink]="['/pangolin']" class="button is-success my-3" > << Retour </a>
+<article class="panel is-primary">
+  <p class="panel-heading has-text-centered">
+    Gestion des amitiés
+  </p>
+  <p class="panel-tabs">
+  </p>
+  <div class="panel-block">
+    <p class="control has-icons-left">
+      <span class="icon is-left">
+        <i class="fas fa-search" aria-hidden="true"></i>
+      </span>
+    </p>
+  </div>
+
+
+  <div class="panel-block is-active" *ngFor="let friend of ListPango">
+    <ng-template [ngIf]="friend._id !== pangolin._id">
+      <span class="panel-icon">
+      <i class="fas fa-book" aria-hidden="true"></i>
+    </span>
+      {{ friend.username}} &nbsp; <span *ngIf="isFriend(friend._id)" class="tag is-primary" > Ami</span>
+
+      <button *ngIf="!isFriend(friend._id)" class="ml-auto button is-primary is-outlined " (click)="ajouter(friend._id)">Ajouter </button>
+      <button *ngIf="isFriend(friend._id)" class="ml-auto button is-warning is-outlined " (click)="supprimer(friend._id)">retirer</button>
+    </ng-template>
+
+  </div>
+
+</article>
+</div>

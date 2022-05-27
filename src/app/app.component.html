@@ -1,6 +1,6 @@
-<nav class="navbar" role="navigation" aria-label="main navigation">
+<nav class="navbar has-background-primary-light" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
-    <a class="navbar-item" href="https://bulma.io">
+    <a class="navbar-item" [routerLink]="['/']">
       <img src="assets/img/pangolin.png" height="120">
     </a>
 
@@ -11,39 +11,20 @@
     </a>
   </div>
 
-  <div id="navbarBasicExample" class="navbar-menu">
-    <div class="navbar-start">
-      <a class="navbar-item">
-        Home
-      </a>
+  <div  id="navbarBasicExample" class="navbar-menu">
 
-
-      <div class="navbar-item has-dropdown is-hoverable">
-        <a class="navbar-link">
-          More
-        </a>
-
-        <div class="navbar-dropdown">
-          <a class="navbar-item">
-            Ajouter un ami
-          </a>
-
-          <hr class="navbar-divider">
-          <a class="navbar-item">
-            Pangolin
-          </a>
-        </div>
-      </div>
-    </div>
 
     <div class="navbar-end">
       <div class="navbar-item">
         <div class="buttons">
-          <a [routerLink]="['/register']" class="button is-primary">
+          <a *ngIf="!isLoggedIn" [routerLink]="['/register']" class="button is-primary is-small">
             <strong>S'inscrire</strong>
           </a>
-          <a class="button is-light">
+          <a *ngIf="!isLoggedIn" [routerLink]="['/login']" class="button is-light is-small">
             Se connecter
+          </a>
+          <a *ngIf="isLoggedIn" (click) = "logout()" class="button is-danger is-small">
+            Se déconnecter
           </a>
         </div>
       </div>
@@ -52,3 +33,5 @@
 </nav>
 
 <router-outlet></router-outlet>
+
+

@@ -14,7 +14,7 @@ export class RegisterComponent implements OnInit {
     password: new FormControl(''),
     role: new FormControl('')
   })
-  submitted =false;
+  submitted = false;
   roles = ['Guerrier','Alchimiste','Sorcier','Espions','Enchanteur']
   constructor(private  formBuilder:FormBuilder,private router: Router) { }
 
@@ -59,7 +59,8 @@ export class RegisterComponent implements OnInit {
       .then(response => {
         response.json()
           .then( data => {
-              this.router.navigate(['/'])
+
+              this.router.navigate(['/login'])
           })
       })
 
@@ -67,6 +68,7 @@ export class RegisterComponent implements OnInit {
 
   onReset(): void{
     this.submitted = false;
+    this.router.navigate(['/login'])
     this.form.reset();
   }
 
