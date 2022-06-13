@@ -15,6 +15,67 @@
   </div>
 
 
+  <form class="form m-6" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="field">
+      <label class="label">Nom d'utilisateur</label>
+      <div class="control has-icons-left has-icons-right">
+        <input class="input is-shadowless" type="text" formControlName="username" [ngClass]="{ 'is-danger': submitted && f['username'].errors }">
+        <span class="icon is-small is-left">
+        <i class="fas fa-user"></i>
+          </span>
+      </div>
+      <div *ngIf="submitted && f['username'].errors">
+        <p  class="has-text-danger" *ngIf="submitted && f['username'].errors['required']"> Le nom d'utilisateur est requis</p>
+        <p  class="has-text-danger" *ngIf="submitted && f['username'].errors['minLength']"> Le nom d'utilisateur doit avoir au moins 3 caractères</p>
+      </div>
+
+
+    </div>
+
+
+    <div class="field">
+      <label class="label">Mot de passe</label>
+      <div class="control has-icons-left has-icons-right">
+        <input class="input is-shadowless" type="password" formControlName="password" [ngClass]="{ 'is-danger': submitted && f['password']?.errors }">
+        <span class="icon is-small is-left">
+      <i class="fas fa-envelope"></i>
+    </span>
+      </div>
+      <div *ngIf="submitted && f['password'].errors">
+        <p  class="has-text-danger" *ngIf="f['password'].errors['required']"> Le mot de passe est requis</p>
+        <p  class="has-text-danger" *ngIf="f['password'].errors['minLength']"> Le mot de passe doit avoir au moins 6 caractères</p>
+      </div>
+
+    </div>
+
+    <div class="field">
+      <label class="label">Rôle</label>
+      <div class="control">
+        <div class="select"  [ngClass]="{ 'is-danger': submitted && f['role'].errors }">
+          <select formControlName="role">
+            <option *ngFor="let r of roles" [ngValue]="r" >{{ r }}</option>
+          </select>
+        </div>
+        <div *ngIf="submitted && f['role'].errors">
+          <p  class="has-text-danger" *ngIf="f['role'].errors['required']"> Le role est requis</p>
+
+        </div>
+      </div>
+
+    </div>
+
+    <div class="field is-grouped">
+      <div class="control">
+        <button type="submit" class="button is-link">Ajouter</button>
+      </div>
+    </div>
+  </form>
+
+
+
+
+
+
   <div class="panel-block is-active" *ngFor="let friend of ListPango">
     <ng-template [ngIf]="friend._id !== pangolin._id">
       <span class="panel-icon">

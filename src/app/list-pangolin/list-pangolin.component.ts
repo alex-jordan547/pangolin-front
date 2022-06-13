@@ -3,6 +3,8 @@ import {PangolinService} from "../pangolin.service";
 import {NavigationEnd, Router} from "@angular/router";
 import {Location} from "@angular/common";
 
+import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+
 @Component({
   selector: 'app-list-pangolin',
   templateUrl: './list-pangolin.component.html',
@@ -13,9 +15,19 @@ export class ListPangolinComponent implements OnInit {
   ListPango: any
   amis: any;
 
+
+  form:FormGroup  = new FormGroup({
+    username: new FormControl(''),
+    password: new FormControl(''),
+    role: new FormControl('')
+  })
+  submitted = false;
+  roles = ['Guerrier','Alchimiste','Sorcier','Espions','Enchanteur']
+
+
   pangolin: any
 
-  constructor(private service: PangolinService, private router: Router) {
+  constructor(private service: PangolinService, private router: Router,private  formBuilder:FormBuilder,) {
 
   }
 
@@ -30,7 +42,55 @@ export class ListPangolinComponent implements OnInit {
     this.pangolin = this.service.pangolin
     console.table('pangolin :', this.pangolin.amis)
 
+    this.form = this.formBuilder.group(
+      {
+        username: [
+          '',
+
+          Validators.required
+        ],
+        password: [
+          '',
+
+          Validators.required
+
+        ],
+        role: [
+          '',
+          Validators.required
+        ],
+      }
+    )
   }
+
+  get f(): { [key:string] : AbstractControl}{
+    return this.form.controls;
+  }
+
+  onSubmit(){
+    this.submitted = true;
+    if(this.form.invalid){
+      return;
+    }
+
+    let init = {
+      method:'POST',
+      body: new Blob([JSON.stringify(this.form.value)],{type:'application/json'})
+    }
+
+    fetch('http://localhost:5000/register',init)
+      .then(response => {
+        response.json()
+          .then( data => {
+          this.ajouter(data.data.insertedId);
+            this.router.navigate(['/pangolin'])
+          })
+      })
+
+  }
+
+
+
 
   ajouter(id: any) {
     this.service.ajouterAmi(id).then(res => {
@@ -60,7 +120,7 @@ export class ListPangolinComponent implements OnInit {
       }
     }
 
-    return false
+    return false;
   }
 
 
